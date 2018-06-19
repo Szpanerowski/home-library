@@ -1,0 +1,10 @@
+
+# Spring datasource
+spring.datasource.url = <datasource-url>
+spring.datasource.username = <user-name>
+spring.datasource.password = <user-password>
+spring.datasource.driver.class = oracle.jdbc.driver.OracleDriver
+
+# Hibernate dialect
+spring.jpa.properties.hibernate.dialect = org.hibernate.dialect.Oracle12cDialect
+spring.jpa.hibernate.ddl-auto = validate

@@ -8,6 +8,5 @@ public class HomeLibraryApplication
 {
     public static void main(String[] args) {
         SpringApplication.run(HomeLibraryApplication.class, args);
-        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>       RUNNING!!!");
     }
 }
