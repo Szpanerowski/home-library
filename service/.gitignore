@@ -17,3 +17,4 @@ target/
 
 # Spring
 src/main/resources/application.properties
+src/main/resources/**/*.p12

@@ -1,4 +1,11 @@
 
+# Spring web
+server.port = 8443
+server.ssl.key-store = <keystore-file>
+server.ssl.key-store-password = <keystore-password>
+server.ssl.keyStoreType = <keystore-type>
+server.ssl.keyAlias = <keystore-alias>
+
 # Spring datasource
 spring.datasource.url = <datasource-url>
 spring.datasource.username = <user-name>
