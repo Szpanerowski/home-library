@@ -15,3 +15,11 @@ spring.datasource.driver.class = oracle.jdbc.driver.OracleDriver
 # Hibernate dialect
 spring.jpa.properties.hibernate.dialect = org.hibernate.dialect.Oracle12cDialect
 spring.jpa.hibernate.ddl-auto = validate
+
+# SimpleJavaMail
+simplejavamail.javaxmail.debug = true
+simplejavamail.smtp.host = <host>
+simplejavamail.smtp.port = <port>
+simplejavamail.smtp.username = <username>
+simplejavamail.smtp.password = <password>
+simplejavamail.transportstrategy = SMTP_TLS

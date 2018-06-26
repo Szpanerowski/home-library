@@ -16,6 +16,8 @@
         <maven.compiler.target>1.8</maven.compiler.target>
 
         <springframework.boot.version>1.5.9.RELEASE</springframework.boot.version>
+        <oracle.dbms.version>12.2.0.1</oracle.dbms.version>
+        <simplejavamail.version>5.0.3</simplejavamail.version>
         <flywaydb.version>5.1.1</flywaydb.version>
         <projectlombok.version>1.18.0</projectlombok.version>
         <junit.version>4.11</junit.version>
@@ -36,6 +38,12 @@
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+            <version>${springframework.boot.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
             <version>${springframework.boot.version}</version>
         </dependency>
@@ -43,7 +51,13 @@
         <dependency>
             <groupId>com.oracle</groupId>
             <artifactId>ojdbc8</artifactId>
-            <version>12.2.0.1</version>
+            <version>${oracle.dbms.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.simplejavamail</groupId>
+            <artifactId>simple-java-mail</artifactId>
+            <version>${simplejavamail.version}</version>
         </dependency>
 
         <dependency>
