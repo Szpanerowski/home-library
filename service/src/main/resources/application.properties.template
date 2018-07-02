@@ -6,6 +6,11 @@ server.ssl.key-store-password = <keystore-password>
 server.ssl.keyStoreType = <keystore-type>
 server.ssl.keyAlias = <keystore-alias>
 
+application.domain.url = <domain-url>
+
+# Internationalization
+spring.messages.basename = locale/messages
+
 # Spring datasource
 spring.datasource.url = <datasource-url>
 spring.datasource.username = <user-name>

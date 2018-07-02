@@ -6,7 +6,7 @@ import org.springframework.context.annotation.ComponentScan;
 
 @ComponentScan({
         "pl.put.swolarz.application.service",
-        "pl.put.swolarz.application.helper",
+        "pl.put.swolarz.application.common.helper",
         "pl.put.swolarz.rest.controller"
 })
 @SpringBootApplication

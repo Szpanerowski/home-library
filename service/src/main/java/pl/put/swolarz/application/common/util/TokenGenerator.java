@@ -1,4 +1,4 @@
-package pl.put.swolarz.application.util;
+package pl.put.swolarz.application.common.util;
 
 import java.security.SecureRandom;
 

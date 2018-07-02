@@ -1,7 +1,7 @@
 package pl.put.swolarz.application.service.account;
 
 
-import pl.put.swolarz.application.exception.ApplicationException;
+import pl.put.swolarz.application.common.exception.ApplicationException;
 
 public interface RegistrationService {
 
