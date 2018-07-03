@@ -2,11 +2,12 @@ package pl.put.swolarz.application.service.account.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.put.swolarz.application.common.exception.ApplicationError;
 import pl.put.swolarz.application.common.exception.ApplicationException;
 import pl.put.swolarz.application.common.helper.authentication.AuthenticationHelper;
-import pl.put.swolarz.infrastructure.manager.session.UserSessionManager;
+import pl.put.swolarz.application.common.manager.session.UserSessionManager;
 import pl.put.swolarz.application.common.provider.email.EmailContentProvider;
 import pl.put.swolarz.application.common.provider.email.EmailTemplate;
 import pl.put.swolarz.application.service.account.RegistrationService;
@@ -20,13 +21,13 @@ import pl.put.swolarz.domain.entity.user.UserAccountStatus;
 import pl.put.swolarz.infrastructure.respository.user.AccountRegistrationRepository;
 import pl.put.swolarz.infrastructure.respository.user.UserAccountRepository;
 
-import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 import static pl.put.swolarz.application.common.provider.email.property.RegistrationConfirmationTemplateProperties.*;
 
-
+@Service
 public class RegistrationServiceImpl implements RegistrationService {
 
     private static final int REGISTRATION_TOKEN_LENGTH = 128;
@@ -77,6 +78,9 @@ public class RegistrationServiceImpl implements RegistrationService {
             throw new ApplicationException(ApplicationError.REGISTRATION_NOT_FOUND);
         }
 
+        if (!accountRegistration.registrationValid(new Date()))
+            return;
+
         UserAccount userAccount = accountRegistration.getAccount();
         userAccount.confirmAccount();
 
@@ -86,13 +90,10 @@ public class RegistrationServiceImpl implements RegistrationService {
 
     private AccountRegistration createAccountRegistration(UserAccount userAccount) {
 
-        Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.DATE, 1);
-
         TokenGenerator tokenGenerator = new TokenGenerator(REGISTRATION_TOKEN_LENGTH);
         String registrationToken = tokenGenerator.generate();
 
-        return new AccountRegistration(0L, calendar.getTime(), registrationToken, userAccount);
+        return new AccountRegistration(0L, new Date(), registrationToken, userAccount);
     }
 
     private void sendEmailInvitation(AccountRegistration accountRegistration) {

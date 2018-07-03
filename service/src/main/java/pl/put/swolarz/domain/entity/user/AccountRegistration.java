@@ -2,6 +2,7 @@ package pl.put.swolarz.domain.entity.user;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import org.apache.commons.lang3.time.DateUtils;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -30,4 +31,12 @@ public class AccountRegistration {
     @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "USER_ACCOUNT_ID", nullable = false, unique = true)
     private UserAccount account;
+
+
+    public boolean registrationValid(Date currentDate) {
+
+        Date validTo = DateUtils.addDays(registered, 1);
+
+        return !(currentDate.after(validTo));
+    }
 }
