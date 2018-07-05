@@ -26,7 +26,7 @@ class LoginForm extends React.Component {
 
     handleChange(e) {
         this.setState({
-            [e.target.id]: event.target.id
+            [e.target.id]: e.target.value
         });
     }
 
@@ -35,10 +35,11 @@ class LoginForm extends React.Component {
     }
 
     onUserLogged(response) {
-        this.props.onAuthenticationSucceeded(response.sessionToken);
+        this.props.onUserAuthenticated(response.sessionToken);
     }
 
     onLoginFailed(response) {
+        console.log(response);
         this.setState({
             loginMessage: 'Login failed...'
         });
@@ -49,7 +50,7 @@ class LoginForm extends React.Component {
             loginMessage: null
         });
         $.ajax({
-            url: config.serverUrl + '/login',
+            url: config.serverUrl + '/account/login',
             method: 'POST',
             data: {
                 email: this.state.loginEmail,
@@ -59,10 +60,6 @@ class LoginForm extends React.Component {
             error: this.onLoginFailed
         });
         e.preventDefault();
-    }
-
-    validateForm() {
-        return true;
     }
 
     render() {
@@ -78,10 +75,11 @@ class LoginForm extends React.Component {
                         <FormControl type="password" value={this.state.password} onChange={this.handleChange} />
                     </FormGroup>
                     <FormGroup controlId="loginButton" validationState={this.state.loginMessage}>
-                        <Button type="submit" block bsSize="large" disabled={ !this.validateForm() } />
+                        <Button type="submit" block bsSize="large" disabled={ !this.validateForm() }>Sign in</Button>
                         <FormControl.Feedback />
                     </FormGroup>
                 </form>
+                <Button bsSize="large" onClick={this.props.onRegistrationRequested}>Sign up</Button>
             </div>
         )
     }

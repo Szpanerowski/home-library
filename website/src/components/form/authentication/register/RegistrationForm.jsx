@@ -12,6 +12,8 @@ class RegistrationForm extends React.Component {
         this.handleChange = this.handleChange.bind(this);
         this.validateForm = this.validateForm.bind(this);
 
+        this.onRegistrationFailed = this.onRegistrationFailed.bind(this);
+
         this.state = {
             username: '',
             email: '',
@@ -22,16 +24,12 @@ class RegistrationForm extends React.Component {
 
     handleChange(e) {
         this.setState({
-            [e.target.id]: event.target.id
+            [e.target.id]: e.target.value
         });
     }
 
     validateForm() {
         return true;
-    }
-
-    onUserRegistered(response) {
-        this.props.onRegistrationCompleted();
     }
 
     onRegistrationFailed(response) {
@@ -46,14 +44,14 @@ class RegistrationForm extends React.Component {
         });
 
         $.ajax({
-           url: config.serverUrl + '/register',
+           url: config.serverUrl + '/account/register',
            method: 'POST',
             data: {
                 username: this.state.username,
                 email: this.state.email,
                 password: this.state.password
             },
-            success: this.onUserRegistered,
+            success: this.props.onRegistrationCompleted(),
             error: this.onRegistrationFailed
         });
 
@@ -77,10 +75,11 @@ class RegistrationForm extends React.Component {
                         <FormControl type="password" value={this.state.password} onChange={this.handleChange} />
                     </FormGroup>
                     <FormGroup controlId="registrationButton" validationState={this.state.registrationMessage}>
-                        <Button type="submit" block bsSize="large" disabled={ !this.validateForm() } />
+                        <Button type="submit" block bsSize="large" disabled={ !this.validateForm() }>Sign up</Button>
                         <FormControl.Feedback />
                     </FormGroup>
                 </form>
+                <Button bsSize="large" onClick={this.props.onLoginRequested}>Sign in</Button>
             </div>
         );
     }
